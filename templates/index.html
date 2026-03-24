@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Natural Language Database</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Ask Database in Natural Language</h2>
+
+<form method="post">
+
+<input type="text" name="question"
+placeholder="Example: show students with marks > 80"
+required>
+
+<button type="submit">Ask</button>
+
+</form>
+
+{% if query %}
+
+<h3>Generated SQL</h3>
+
+<p>{{ query }}</p>
+
+{% endif %}
+
+{% if result %}
+
+<h3>Results</h3>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Subject</th>
+<th>Marks</th>
+</tr>
+
+{% for row in result %}
+
+<tr>
+<td>{{ row[0] }}</td>
+<td>{{ row[1] }}</td>
+<td>{{ row[2] }}</td>
+<td>{{ row[3] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
