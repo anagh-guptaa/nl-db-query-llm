@@ -1,11 +1,14 @@
 from flask import Flask,render_template,request
 import MySQLdb
 from llm_query import generate_sql
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app=Flask(__name__)
 
 def get_db():
-    return MySQLdb.connect(host="localhost",user="root",passwd="piXcel_123",db="nl_database")
+    return MySQLdb.connect(host="localhost",user="root",passwd=os.getenv("SQL_PASSWORD"),db="nl_database")
 
 @app.route("/", methods=["GET","POST"])
 def home():
